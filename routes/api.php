@@ -23,5 +23,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/gunbroker/getAccessToken', [GunBrokerController::class, 'getAccessToken']);
 
-Route::get('/gunbroker/item/{itemId}', [GunBrokerController::class, 'getItem']);
+Route::post('/gunbroker/item/{itemId}', [GunBrokerController::class, 'getItem']);
 
