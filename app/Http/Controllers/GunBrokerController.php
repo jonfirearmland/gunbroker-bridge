@@ -42,7 +42,7 @@ protected $accessToken;
         $client = new Client();
 
         try {
-            $response = $client->request('GET', "https://api.gunbroker.com/v1/ItemsSelling", [
+            $response = $client->request('GET', "https://api.gunbroker.com/v1/ItemsSelling?Sort=17", [
                 'headers' => [
                     'X-DevKey' => '5cb51112-79f5-4959-ab0e-344901c260a9',
                     'X-AccessToken' => $this->accessToken,
