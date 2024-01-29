@@ -16,4 +16,5 @@ use App\Http\Controllers\GunBrokerController;
 
 Route::get('/', [GunBrokerController::class, 'getAccessToken']);
 
-Route::get('/gunbroker/getAccessToken', [GunBrokerController::class, 'getAccessToken']);
+Route::get('/gunbroker/{action}', [GunBrokerController::class, 'getAccessToken'])
+    ->where('action', 'getAccessToken');
