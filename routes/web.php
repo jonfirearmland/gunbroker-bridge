@@ -14,8 +14,6 @@ use App\Http\Controllers\GunBrokerController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [GunBrokerController::class, 'getAccessToken']);
 
 Route::get('/gunbroker/getAccessToken', [GunBrokerController::class, 'getAccessToken']);
