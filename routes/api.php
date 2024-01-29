@@ -25,3 +25,5 @@ Route::post('/gunbroker/getAccessToken', [GunBrokerController::class, 'getAccess
 
 Route::post('/gunbroker/item/{itemId}', [GunBrokerController::class, 'getItem']);
 
+Route::post('/gunbroker/getItemsEnding', [GunBrokerController::class, 'getItem']);
+
