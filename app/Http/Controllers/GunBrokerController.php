@@ -41,7 +41,8 @@ protected $accessToken;
     public function getItems(Request $request) {
         $client = new Client();
         $queryString = $request->getQueryString();
-       
+        $itemResponses = []; // Array to store responses for each item
+        
         try {
             $response = $client->request('GET', "https://api.gunbroker.com/v1/ItemsSelling?" . $queryString, [
                 'headers' => [
@@ -52,16 +53,28 @@ protected $accessToken;
             ]);
     
             $response_data = json_decode($response->getBody(), true);
-            
-            if (isset($response_data)) {
-                return response()->json(['data' => $response_data]);
+    
+            if (isset($response_data['results'])) {
+                foreach ($response_data['results'] as $item) {
+                    $itemUrl = $item['links'][0]['href']; // Get the item's URL from the first link
+                    $itemResponse = $client->request('GET', $itemUrl, [
+                        'headers' => [
+                            'X-DevKey' => '5cb51112-79f5-4959-ab0e-344901c260a9',
+                            'X-AccessToken' => $this->accessToken,
+                        ],
+                        'verify' => false,
+                    ]);
+                    $itemResponses[] = json_decode($itemResponse->getBody(), true);
+                }
+                return response()->json(['data' => $itemResponses]);
             } else {
-                return response()->json(['error' => 'Item not found or other error']);
+                return response()->json(['error' => 'Items not found or other error']);
             }
         } catch (GuzzleException $e) {
-            return response()->json(['error' => 'Item not found or other error']);
+            return response()->json(['error' => 'Items not found or other error']);
         }
     }
+    
 
     private function getAccessToken()
     {
