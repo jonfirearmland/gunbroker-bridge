@@ -12,7 +12,7 @@ class GunBrokerController extends Controller
 protected $accessToken;
   
     public function __construct() {
-        $this->accessToken = $this->getAccessToken();
+        $this->getAccessToken();
     }
     public function getItem($itemId) {
         return response()->json(['data' => $this->accessToken]);
@@ -58,7 +58,7 @@ protected $accessToken;
 
             $response_data = json_decode($response->getBody(), true);
             if (isset($response_data["accessToken"])) {
-                return response()->json(['data' => $response_data["accessToken"]]);
+                $this->accessToken = $response_data["accessToken"];
             } else {
                 echo "No accessToken found in the response.";
                 return null;
