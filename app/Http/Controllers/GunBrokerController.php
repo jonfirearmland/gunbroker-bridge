@@ -34,7 +34,7 @@ protected $accessToken;
                 return response()->json(['error' => 'Item not found or other error']);
             }
         } catch (GuzzleException $e) {
-            return response()->json(['error' => $e->getMessage()]);
+            return response()->json(['error' => 'Item not found or other error']);
         }
     }
 
