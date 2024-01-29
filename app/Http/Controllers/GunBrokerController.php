@@ -15,28 +15,27 @@ protected $accessToken;
         $this->getAccessToken();
     }
     public function getItem($itemId) {
-        return response()->json(['data' => $this->accessToken]);
-        // $client = new Client();
+        $client = new Client();
 
-        // try {
-        //     $response = $client->request('GET', "https://api.gunbroker.com/v1/Items/{$itemId}", [
-        //         'headers' => [
-        //             'X-DevKey' => '5cb51112-79f5-4959-ab0e-344901c260a9',
-        //             'X-AccessToken' => $this->accessToken,
-        //         ],
-        //         'verify' => false,
-        //     ]);
+        try {
+            $response = $client->request('GET', "https://api.gunbroker.com/v1/Items/{$itemId}", [
+                'headers' => [
+                    'X-DevKey' => '5cb51112-79f5-4959-ab0e-344901c260a9',
+                    'X-AccessToken' => $this->accessToken,
+                ],
+                'verify' => false,
+            ]);
     
-        //     $response_data = json_decode($response->getBody(), true);
+            $response_data = json_decode($response->getBody(), true);
             
-        //     if (isset($response_data)) {
-        //         return response()->json(['data' => $response_data]);
-        //     } else {
-        //         return response()->json(['error' => 'Item not found or other error']);
-        //     }
-        // } catch (GuzzleException $e) {
-        //     return response()->json(['error' => $e->getMessage()]);
-        // }
+            if (isset($response_data)) {
+                return response()->json(['data' => $response_data]);
+            } else {
+                return response()->json(['error' => 'Item not found or other error']);
+            }
+        } catch (GuzzleException $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
     }
 
     private function getAccessToken()
