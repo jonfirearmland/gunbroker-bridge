@@ -27,3 +27,5 @@ Route::post('/gunbroker/item/{itemId}', [GunBrokerController::class, 'getItem'])
 
 Route::post('/gunbroker/getItems', [GunBrokerController::class, 'getItems']);
 
+Route::post('/gunbroker/getSold', [GunBrokerController::class, 'getSold']);
+
