@@ -59,6 +59,28 @@ protected $accessToken;
             return response()->json(['error' => 'Items not found or other error']);
         }
     }
+
+    public function getSold(Request $request) {
+        $client = new Client();
+        $queryString = $request->getQueryString();
+        
+        try {
+            $response = $client->request('GET', "https://api.gunbroker.com/v1/ItemsEnded?" . $queryString, [
+                'headers' => [
+                    'X-DevKey' => '5cb51112-79f5-4959-ab0e-344901c260a9',
+                    'X-AccessToken' => $this->accessToken,
+                ],
+                'verify' => false,
+            ]);
+    
+            $response_data = json_decode($response->getBody(), true);
+    
+                return response()->json(['data' => $response_data['results']]);
+
+        } catch (GuzzleException $e) {
+            return response()->json(['error' => 'Items not found or other error']);
+        }
+    }
     
 
     private function getAccessToken()
