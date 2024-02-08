@@ -101,6 +101,8 @@ protected $accessToken;
             ]);
 
             $response_data = json_decode($response->getBody(), true);
+            var_dump($response_data);
+            die();
             if (isset($response_data["accessToken"])) {
                 $this->accessToken = $response_data["accessToken"];
             } else {
