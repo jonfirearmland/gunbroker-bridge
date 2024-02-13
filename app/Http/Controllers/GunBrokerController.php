@@ -85,15 +85,13 @@ protected $accessToken;
 
     private function getAccessToken()
     {
-
-        return response()->json(['error' => 'test']);
         $client = new Client();
 
         try {
             $response = $client->request('POST', 'https://api.gunbroker.com/v1/Users/AccessToken', [
                 'form_params' => [
-                    'Username' => 'FirearmLand',
-                    'Password' => '3*MCmR3t@iL2!'
+                    'Username' => 'izzyisbizzy',
+                    'Password' => '#+~HN54?dxroeC706EBRu'
                 ],
                 'headers' => [
                     'X-DevKey' => '5cb51112-79f5-4959-ab0e-344901c260a9',
