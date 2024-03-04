@@ -29,3 +29,5 @@ Route::post('/gunbroker/getItems', [GunBrokerController::class, 'getItems']);
 
 Route::post('/gunbroker/getSold', [GunBrokerController::class, 'getSold']);
 
+Route::post('/gunbroker/getScheduled', [GunBrokerController::class, 'getScheduled']);
+
